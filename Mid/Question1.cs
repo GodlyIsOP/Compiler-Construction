@@ -11,31 +11,19 @@ namespace CustomStringProcessor
             Console.WriteLine("======================");
 
             // The custom string to process
-            string customString = "x:userinput; y:userinput; z:4; result: x * y + z;";
+            string customString = "x:0; y:1; z:userinput; result: x * y + z;";
             Console.WriteLine($"Processing string: \"{customString}\"");
 
-            // Extract variables and values using regex
-            // For requirement of using last two digits of student ID in variable name (01)
-            double x01 = 0;
-            double y = 0;
+            // Extract variables and values
+            // Using student roll number 01: x = 0, y = 1
+            double x01 = 0; // first digit of roll number
+            double y = 1;   // second digit of roll number
             double z = 0;
 
-            // Extract z value from the string
-            Match zMatch = Regex.Match(customString, @"z:(\d+)");
-            if (zMatch.Success)
-            {
-                z = Convert.ToDouble(zMatch.Groups[1].Value);
-            }
-
-            // Get user input for x (since the string has "userinput")
-            Console.Write("\nEnter value for x: ");
-            string xInput = Console.ReadLine();
-            x01 = Convert.ToDouble(xInput);
-
-            // Get user input for y (since the string has "userinput")
-            Console.Write("Enter value for y: ");
-            string yInput = Console.ReadLine();
-            y = Convert.ToDouble(yInput);
+            // Get user input for z (since it's marked as "userinput" in the string)
+            Console.Write("\nEnter value for z: ");
+            string zInput = Console.ReadLine();
+            z = Convert.ToDouble(zInput);
 
             // Extract the formula from the custom string
             Match formulaMatch = Regex.Match(customString, @"result: (.*?);");
